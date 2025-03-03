@@ -2,6 +2,7 @@ import data
 import build_data
 import unittest
 
+import hw3
 
 # These two values are defined to support testing below. The
 # data within these structures should not be modified. Doing
@@ -176,33 +177,413 @@ reduced_data = [
     ]
 
 class TestCases(unittest.TestCase):
-    pass
+   pass
 
-    # Part 1
-    # test population_total
 
-    # Part 2
-    # test filter_by_state
+   # Part 1
+   # test population_total
+   def test_population_total1(self):
+       counties = build_data.get_data()
+       result = hw3.population_total(counties)
+       expected = 318857056
+       self.assertEqual(result,expected)
 
-    # Part 3
-    # test population_by_education
-    # test population_by_ethnicity
-    # test population_below_poverty_level
 
-    # Part 4
-    # test percent_by_education
-    # test percent_by_ethnicity
-    # test percent_below_poverty_level
+   def test_population_total2(self):
+       first_county = reduced_data[0]
+       second_county = reduced_data[1]
+       third_county = reduced_data[2]
+       counties = [first_county, second_county, third_county]
+       result = hw3.population_total(counties)
+       expected = 396175
+       self.assertEqual(result,expected)
 
-    # Part 5
-    # test education_greater_than
-    # test education_less_than
-    # test ethnicity_greater_than
-    # test ethnicity_less_than
-    # test below_poverty_level_greater_than
-    # test below_poverty_level_less_than
+
+   # Part 2
+   # test filter_by_state
+   def test_filter_by_state1(self):
+       first_county = reduced_data[0]
+       second_county = reduced_data[1]
+       third_county = reduced_data[2]
+       fourth_county = reduced_data[3]
+       counties = [first_county, second_county, third_county, fourth_county]
+       abreviation = 'CA'
+       result = hw3.filter_by_state(counties,abreviation)
+       expected = [reduced_data[2],reduced_data[3]]
+       self.assertEqual(result,expected)
+
+
+   def test_filter_by_state2(self):
+       first_county = reduced_data[0]
+       second_county = reduced_data[1]
+       third_county = reduced_data[2]
+       fourth_county = reduced_data[3]
+       counties = [first_county, second_county, third_county, fourth_county]
+       abreviation = 'AL'
+       result = hw3.filter_by_state(counties, abreviation)
+       expected = [reduced_data[0]]
+       self.assertEqual(result, expected)
+
+
+   # Part 3
+   # test population_by_education
+   # test population_by_ethnicity
+   # test population_below_poverty_level
+
+
+from hw3 import CountyDemographics, population_by_education
+
+
+
+
+def test_population_by_education1(self):
+   first_county = reduced_data[2]
+   second_county = reduced_data[3]
+   third_county = reduced_data[5]
+   counties = [first_county, second_county, third_county]
+   education_key = 'High School or Higher'
+   result = hw3.population_by_education(counties, education_key)
+   expected = 459596.788
+   self.assertEqual(result, expected)
+
+
+
+
+def test_population_by_education2(self):
+   first_county = reduced_data[0]
+   second_county = reduced_data[1]
+   third_county = reduced_data[2]
+   counties = [first_county, second_county, third_county]
+   education_key = 'High School or Higher'
+   result = hw3.population_by_education(counties, education_key)
+   expected = 348191.422
+   self.assertEqual(result, expected)
+
+
+
+
+# test population_by_ethnicity
+def test_population_by_ethnicity1(self):
+   first_county = reduced_data[0]
+   second_county = reduced_data[1]
+   third_county = reduced_data[2]
+   counties = [first_county, second_county, third_county]
+   ethnicity_key = 'Black Alone'
+   result = hw3.population_by_ethnicity(counties, ethnicity_key)
+   expected = 17485.843
+   self.assertEqual(result, expected)
+
+
+
+
+def test_population_by_ethnicity2(self):
+   first_county = reduced_data[0]
+   second_county = reduced_data[1]
+   third_county = reduced_data[2]
+   counties = [first_county, second_county, third_county]
+   ethnicity_key = 'American Indian and Alaska Native Alone'
+   result = hw3.population_by_ethnicity(counties, ethnicity_key)
+   expected = 5726.562
+   self.assertEqual(result, expected)
+
+
+
+
+# test population_below_poverty_level
+def test_population_below_poverty_level1(self):
+   first_county = reduced_data[0]
+   second_county = reduced_data[1]
+   third_county = reduced_data[2]
+   counties = [first_county, second_county, third_county]
+   result = hw3.population_below_poverty_level(counties)
+   expected = 59074.458000000006
+   self.assertEqual(result, expected)
+
+
+
+
+def test_population_below_poverty_level2(self):
+   first_county = reduced_data[3]
+   second_county = reduced_data[4]
+   third_county = reduced_data[5]
+   counties = [first_county, second_county, third_county]
+   result = hw3.population_below_poverty_level(counties)
+   expected = 47830.744000000006
+   self.assertEqual(result, expected)
+
+
+
+
+# Part 4
+# test percent_by_education
+
+
+
+
+def test_percent_by_population(self):
+   first_county = reduced_data[0]
+   second_county = reduced_data[1]
+   third_county = reduced_data[2]
+   counties = [first_county, second_county, third_county]
+   education_key = 'High School or Higher'
+   result = hw3.percent_by_education(counties, education_key)
+   expected = 87.8882872467975
+   self.assertEqual(result, expected)
+
+
+
+
+def test_percent_by_population2(self):
+   first_county = reduced_data[0]
+   second_county = reduced_data[1]
+   third_county = reduced_data[2]
+   counties = [first_county, second_county, third_county]
+   education_key = "Bachelor's Degree or Higher"
+   result = hw3.percent_by_education(counties, education_key)
+   expected = 27.339274563008775
+   self.assertEqual(result, expected)
+
+
+
+
+# test percent_by_ethnicity
+def test_percent_by_ethnicity1(self):
+   first_county = reduced_data[0]
+   second_county = reduced_data[1]
+   third_county = reduced_data[2]
+   counties = [first_county, second_county, third_county]
+   ethnicity_key = "Two or More Races"
+   result = hw3.percent_by_ethnicity(counties, ethnicity_key)
+   expected = 3.0828416735028714
+   self.assertEqual(result, expected)
+
+
+
+
+def test_percent_by_ethnicity2(self):
+   first_county = reduced_data[3]
+   second_county = reduced_data[4]
+   third_county = reduced_data[5]
+   counties = [first_county, second_county, third_county]
+   ethnicity_key = "White Alone"
+   result = hw3.percent_by_ethnicity(counties, ethnicity_key)
+   expected = 78.9533931238289
+   self.assertEqual(result, expected)
+
+
+
+
+# test percent_below_poverty_level
+
+
+
+
+def test_percent_below_poverty_level1(self):
+   first_county = reduced_data[3]
+   second_county = reduced_data[4]
+   third_county = reduced_data[5]
+   counties = [first_county, second_county, third_county]
+   result = hw3.percent_below_poverty_level(counties)
+   expected = 18.94759643000036
+   self.assertEqual(result, expected)
+
+
+
+
+def test_percent_below_poverty_level2(self):
+   first_county = reduced_data[0]
+   second_county = reduced_data[1]
+   third_county = reduced_data[2]
+   counties = [first_county, second_county, third_county]
+   result = hw3.percent_below_poverty_level(counties)
+   expected = 14.91120287751625
+   self.assertEqual(result, expected)
+
+
+
+
+# Part 5
+# test education_greater_than
+
+
+
+
+def test_education_greater_than(self):
+   first_county = reduced_data[0]
+   second_county = reduced_data[1]
+   third_county = reduced_data[2]
+   counties = [first_county, second_county, third_county]
+   education_key = 'High School or Higher'
+   threshold = 90.0
+   result = hw3.education_greater_than(counties, education_key, threshold)
+   expected = []
+   self.assertEqual(result, expected)
+
+
+
+
+def test_education_greater_than2(self):
+   first_county = reduced_data[0]
+   second_county = reduced_data[1]
+   third_county = reduced_data[2]
+   counties = [first_county, second_county, third_county]
+   education_key = 'High School or Higher'
+   threshold = 70.0
+   result = hw3.education_greater_than(counties, education_key, threshold)
+   expected = [reduced_data[0], reduced_data[1], reduced_data[2]]
+   self.assertEqual(result, expected)
+
+
+
+
+# test education_less_than
+def test_education_less_than1(self):
+   first_county = reduced_data[0]
+   second_county = reduced_data[1]
+   third_county = reduced_data[2]
+   counties = [first_county, second_county, third_county]
+   education_key = 'High School or Higher'
+   threshold = 70.0
+   result = hw3.education_less_than(counties, education_key, threshold)
+   expected = []
+   self.assertEqual(result, expected)
+
+
+
+
+def test_education_less_than2(self):
+   first_county = reduced_data[3]
+   second_county = reduced_data[4]
+   third_county = reduced_data[5]
+   counties = [first_county, second_county, third_county]
+   education_key = "Bachelor's Degree or Higher"
+   threshold = 30.0
+   result = hw3.education_less_than(counties, education_key, threshold)
+   expected = [reduced_data[4], reduced_data[5]]
+   self.assertEqual(result, expected)
+
+
+
+
+# test ethnicity_greater_than
+def test_ethnicity_greater_than1(self):
+   first_county = reduced_data[0]
+   second_county = reduced_data[1]
+   third_county = reduced_data[2]
+   counties = [first_county, second_county, third_county]
+   ethnicity_key = 'Two or More Races'
+   threshold = 2.0
+   result = hw3.ethnicity_greater_than(counties, ethnicity_key, threshold)
+   expected = [reduced_data[1], reduced_data[2]]
+   self.assertEqual(result, expected)
+
+
+
+
+def test_ethnicity_greater_than2(self):
+   first_county = reduced_data[0]
+   second_county = reduced_data[1]
+   third_county = reduced_data[2]
+   counties = [first_county, second_county, third_county]
+   ethnicity_key = 'White Only'
+   threshold = 60.0
+   result = hw3.ethnicity_greater_than(counties, ethnicity_key, threshold)
+   expected = []
+   self.assertEqual(result, expected)
+
+
+
+
+# test ethnicity_less_than
+def test_ethnicity_less_than1(self):
+   first_county = reduced_data[0]
+   second_county = reduced_data[1]
+   third_county = reduced_data[2]
+   counties = [first_county, second_county, third_county]
+   ethnicity_key = 'Hispanic or Latino'
+   threshold = 15.0
+   result = hw3.ethnicity_less_than(counties, ethnicity_key, threshold)
+   expected = [reduced_data[0], reduced_data[1]]
+   self.assertEqual(result, expected)
+
+
+
+
+def test_ethnicity_less_than2(self):
+   first_county = reduced_data[0]
+   second_county = reduced_data[1]
+   third_county = reduced_data[2]
+   counties = [first_county, second_county, third_county]
+   ethnicity_key = 'Hispanic or Latino'
+   threshold = 15.0
+   result = hw3.ethnicity_less_than(counties, ethnicity_key, threshold)
+   expected = [reduced_data[0], reduced_data[1]]
+   self.assertEqual(result, expected)
+
+
+
+
+# test below_poverty_level_greater_than
+
+
+
+
+def test_below_poverty_level_greater_than1(self):
+   first_county = reduced_data[0]
+   second_county = reduced_data[1]
+   third_county = reduced_data[2]
+   counties = [first_county, second_county, third_county]
+   threshold = 15.0
+   result = hw3.below_poverty_level_greater_than(counties, threshold)
+   expected = [reduced_data[1]]
+   self.assertEqual(result, expected)
+
+
+
+
+def test_below_poverty_level_greater_than2(self):
+   first_county = reduced_data[3]
+   second_county = reduced_data[4]
+   third_county = reduced_data[5]
+   counties = [first_county, second_county, third_county]
+   threshold = 16.0
+   result = hw3.below_poverty_level_greater_than(counties, threshold)
+   expected = [reduced_data[3], reduced_data[5]]
+   self.assertEqual(result, expected)
+
+
+
+
+# test below_poverty_level_less_than
+
+
+
+
+def test_below_poverty_level_less_than1(self):
+   first_county = reduced_data[0]
+   second_county = reduced_data[4]
+   third_county = reduced_data[5]
+   counties = [first_county, second_county, third_county]
+   threshold = 18.0
+   result = hw3.below_poverty_level_less_than(counties, threshold)
+   expected = [reduced_data[0], reduced_data[4]]
+   self.assertEqual(result, expected)
+
+
+
+
+def test_below_poverty_level_less_than2(self):
+   first_county = reduced_data[1]
+   second_county = reduced_data[2]
+   third_county = reduced_data[3]
+   counties = [first_county, second_county, third_county]
+   threshold = 14.0
+   result = hw3.below_poverty_level_less_than(counties, threshold)
+   expected = []
+   self.assertEqual(result, expected)
+
 
 
 
 if __name__ == '__main__':
-    unittest.main()
+   unittest.main()

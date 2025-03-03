@@ -6,7 +6,6 @@ from data import CountyDemographics
 # Given county demographics in dictionary form, convert to an object.
 # input: county demographics information as an inconsistently typed dictionary
 # output: the county demographics information as a CountyDemographics object
-#
 # Note that this function assumes the dictionary is properly structured.
 def convert_county(county) -> CountyDemographics:
     if 'Median Houseold Income' in county['Income']:
